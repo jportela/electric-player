@@ -5,7 +5,7 @@ const baseConfig = require('./webpack.config.base');
 module.exports = Object.assign({}, baseConfig, {
   target: 'electron-renderer',
   entry: {
-    player: './src/player/index.ts',
+    player: './src/player/index.tsx',
   },
   plugins: [
     new CopyWebpackPlugin([{
