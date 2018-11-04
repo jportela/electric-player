@@ -1,5 +1,4 @@
-import { Box } from 'grommet';
-import { PauseFill, PlayFill } from 'grommet-icons';
+import { Icon } from 'antd';
 import * as React from 'react';
 import { PlayingStatus } from '../player-state';
 
@@ -12,11 +11,18 @@ export default class PlayButton extends React.Component<IPlayButtonProps> {
 
   getIcon = () => {
     const { playingStatus } = this.props;
+    let iconType;
     if (playingStatus === 'playing') {
-      return <PauseFill />;
+      iconType = 'pause';
     } else {
-      return <PlayFill />;
+      iconType = 'caret-right';
     }
+    return (
+      <Icon
+        type={iconType}
+        style={{fontSize: '3em'}}
+      />
+      );
   }
 
   render() {

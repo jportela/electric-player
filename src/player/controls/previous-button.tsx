@@ -1,4 +1,4 @@
-import { ChapterPrevious } from 'grommet-icons';
+import { Icon } from 'antd';
 import * as React from 'react';
 import { PlayingStatus } from '../player-state';
 
@@ -14,9 +14,9 @@ export default class PreviousButton extends React.Component<IPreviousButtonProps
 
     return (
       <a onClick={onClick}>
-        <ChapterPrevious
-          size="large"
-          color="control"
+        <Icon
+          type="step-backward"
+          style={{fontSize: '3em'}}
         />
       </a>
     );

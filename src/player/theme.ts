@@ -1,7 +1,7 @@
 const theme = {
   color: '#333333',
   colors: {
-    control: '#ff0000',
+    plain: '#ff0000',
   },
 };
 

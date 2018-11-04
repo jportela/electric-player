@@ -1,11 +1,9 @@
-import { Box } from 'grommet';
+import { Layout } from 'antd';
 import * as React from 'react';
-import { ThemeProvider } from 'styled-components';
 
 import PlayerControls from './controls/player';
 import HeaderTitle from './header/title';
 import { PlayingStatus } from './player-state';
-import theme from './theme';
 
 interface IAppState {
   playingStatus: PlayingStatus;
@@ -33,15 +31,17 @@ export default class App extends React.Component<any, IAppState> {
 
   render() {
     return (
-    <ThemeProvider theme={theme}>
-      <Box align="center" gap="large">
+    <Layout>
+      <Layout.Header>
         <HeaderTitle />
+      </Layout.Header>
+      <Layout.Content>
         <PlayerControls
           playingStatus={this.state.playingStatus}
           onPlayButtonClick={this.onPlayButtonClick}
         />
-      </Box>
-    </ThemeProvider>
+      </Layout.Content>
+    </Layout>
     );
   }
 }

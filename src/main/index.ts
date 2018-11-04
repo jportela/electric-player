@@ -1,4 +1,5 @@
 import { app, BrowserWindow } from 'electron';
+import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 
 let mainWindow: BrowserWindow;
 
@@ -14,6 +15,12 @@ function createWindow() {
   // Emitted when the window is closed.
   mainWindow.on('closed', () => {
     mainWindow = null;
+  });
+  installExtension(REACT_DEVELOPER_TOOLS).then((name) => {
+    console.log(`Added Extension:  ${name}`);
+  })
+  .catch((err) => {
+    console.log('An error occurred: ', err)
   });
 }
 

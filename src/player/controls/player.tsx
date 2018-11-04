@@ -1,4 +1,3 @@
-import { Box, Grid } from 'grommet';
 import * as React from 'react';
 
 import { PlayingStatus } from '../player-state';
@@ -15,7 +14,7 @@ export default class PlayerControls extends React.Component<IPlayerControlsProps
 
   render() {
     return (
-    <Box direction="row" gap="medium">
+    <div>
       <PreviousButton
         playingStatus={this.props.playingStatus}
         onClick={() => {}} />
@@ -25,7 +24,7 @@ export default class PlayerControls extends React.Component<IPlayerControlsProps
       <NextButton
         playingStatus={this.props.playingStatus}
         onClick={() => {}} />
-      </Box>
+      </div>
     );
   }
 }

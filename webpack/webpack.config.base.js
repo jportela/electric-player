@@ -10,6 +10,13 @@ module.exports = {
     rules: [{
       test: /\.tsx?$/,
       loader: 'ts-loader',
+    },
+    {
+      test: /\.css$/,
+      use: [
+        { loader: "style-loader" },
+        { loader: "css-loader" }
+      ]
     }],
   },
   resolve: {
@@ -19,4 +26,7 @@ module.exports = {
     filename: '[name].js',
     path: path.resolve(__dirname, '../dist')
   },
+  externals: [
+    '7zip'
+  ]
 };
