@@ -1,4 +1,4 @@
-import { Layout } from 'antd';
+import Grid from '@material-ui/core/Grid';
 import * as React from 'react';
 
 import PlayerControls from './controls/player';
@@ -31,17 +31,18 @@ export default class App extends React.Component<any, IAppState> {
 
   render() {
     return (
-    <Layout>
-      <Layout.Header>
-        <HeaderTitle />
-      </Layout.Header>
-      <Layout.Content>
-        <PlayerControls
-          playingStatus={this.state.playingStatus}
-          onPlayButtonClick={this.onPlayButtonClick}
-        />
-      </Layout.Content>
-    </Layout>
+      <Grid
+        container
+        direction="column"
+        justify="center"
+        alignItems="stretch"
+      >
+      <HeaderTitle />
+      <PlayerControls
+        playingStatus={this.state.playingStatus}
+        onPlayButtonClick={this.onPlayButtonClick}
+      />
+    </Grid>
     );
   }
 }

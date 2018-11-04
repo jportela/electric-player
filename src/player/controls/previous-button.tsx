@@ -1,4 +1,5 @@
-import { Icon } from 'antd';
+import IconButton from '@material-ui/core/IconButton';
+import SkipPrevious from '@material-ui/icons/SkipPrevious';
 import * as React from 'react';
 import { PlayingStatus } from '../player-state';
 
@@ -13,12 +14,9 @@ export default class PreviousButton extends React.Component<IPreviousButtonProps
     const { onClick } = this.props;
 
     return (
-      <a onClick={onClick}>
-        <Icon
-          type="step-backward"
-          style={{fontSize: '3em'}}
-        />
-      </a>
+      <IconButton onClick={onClick}>
+        <SkipPrevious fontSize="large" />
+      </IconButton>
     );
   }
 

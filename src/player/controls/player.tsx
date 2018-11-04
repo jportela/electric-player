@@ -1,3 +1,4 @@
+import Grid from '@material-ui/core/Grid';
 import * as React from 'react';
 
 import { PlayingStatus } from '../player-state';
@@ -14,7 +15,12 @@ export default class PlayerControls extends React.Component<IPlayerControlsProps
 
   render() {
     return (
-    <div>
+    <Grid
+      container
+      direction="row"
+      justify="center"
+      alignItems="center"
+    >
       <PreviousButton
         playingStatus={this.props.playingStatus}
         onClick={() => {}} />
@@ -24,7 +30,7 @@ export default class PlayerControls extends React.Component<IPlayerControlsProps
       <NextButton
         playingStatus={this.props.playingStatus}
         onClick={() => {}} />
-      </div>
+      </Grid>
     );
   }
 }

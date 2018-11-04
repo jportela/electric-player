@@ -1,4 +1,6 @@
-import { Icon } from 'antd';
+import IconButton from '@material-ui/core/IconButton';
+import Pause from '@material-ui/icons/Pause';
+import PlayArrow from '@material-ui/icons/PlayArrow';
 import * as React from 'react';
 import { PlayingStatus } from '../player-state';
 
@@ -11,18 +13,11 @@ export default class PlayButton extends React.Component<IPlayButtonProps> {
 
   getIcon = () => {
     const { playingStatus } = this.props;
-    let iconType;
     if (playingStatus === 'playing') {
-      iconType = 'pause';
+      return <Pause fontSize="large" />;
     } else {
-      iconType = 'caret-right';
+      return <PlayArrow fontSize="large" />;
     }
-    return (
-      <Icon
-        type={iconType}
-        style={{fontSize: '3em'}}
-      />
-      );
   }
 
   render() {
@@ -32,9 +27,9 @@ export default class PlayButton extends React.Component<IPlayButtonProps> {
     const icon = this.getIcon();
 
     return (
-      <a onClick={onClick}>
+      <IconButton onClick={onClick}>
         {icon}
-      </a>
+      </IconButton>
     );
   }
 
