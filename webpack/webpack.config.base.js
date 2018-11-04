@@ -10,13 +10,6 @@ module.exports = {
     rules: [{
       test: /\.tsx?$/,
       loader: 'ts-loader',
-    },
-    {
-      test: /\.css$/,
-      use: [
-        { loader: "style-loader" },
-        { loader: "css-loader" }
-      ]
     }],
   },
   resolve: {
