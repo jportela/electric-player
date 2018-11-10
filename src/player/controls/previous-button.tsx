@@ -14,7 +14,7 @@ export default class PreviousButton extends React.Component<IPreviousButtonProps
     const { onClick } = this.props;
 
     return (
-      <IconButton onClick={onClick}>
+      <IconButton onClick={onClick} color="primary">
         <SkipPrevious fontSize="large" />
       </IconButton>
     );

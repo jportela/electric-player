@@ -27,7 +27,7 @@ export default class PlayButton extends React.Component<IPlayButtonProps> {
     const icon = this.getIcon();
 
     return (
-      <IconButton onClick={onClick}>
+      <IconButton onClick={onClick} color="primary">
         {icon}
       </IconButton>
     );

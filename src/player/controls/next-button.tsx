@@ -14,7 +14,7 @@ export default class NextButton extends React.Component<INextButtonProps> {
     const { onClick } = this.props;
 
     return (
-      <IconButton onClick={onClick}>
+      <IconButton onClick={onClick} color="primary">
         <SkipNext fontSize="large" />
       </IconButton>
     );
