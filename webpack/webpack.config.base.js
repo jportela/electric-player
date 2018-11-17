@@ -1,11 +1,10 @@
 const path = require('path');
 
-module.exports = {
+const baseConfig = {
   node: {
     __dirname: false,
     __filename: false
   },
-  mode: process.env.ENV || 'development',
   module: {
     rules: [{
       test: /\.tsx?$/,
@@ -27,6 +26,7 @@ module.exports = {
     }
   ],
   },
+  plugins: [],
   resolve: {
     extensions: [ '.tsx', '.ts', '.js' ]
   },
@@ -38,3 +38,21 @@ module.exports = {
     '7zip'
   ]
 };
+
+const productionConfig = {
+  mode: 'production',
+};
+
+const developmentConfig = {
+  mode: 'development',
+}
+
+function applyEnvironment(env) {
+  if (env === 'production') {
+    return Object.assign({}, baseConfig, productionConfig);
+  }
+  
+  return Object.assign({}, baseConfig, developmentConfig);
+}
+
+module.exports = applyEnvironment(process.env.ENV);

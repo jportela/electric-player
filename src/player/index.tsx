@@ -4,7 +4,19 @@ import App from './app';
 
 import 'typeface-roboto';
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root'),
-);
+function renderApp() {
+  ReactDOM.render(
+    <App />,
+    document.getElementById('root'),
+  );
+}
+
+renderApp();
+
+const hot = (module as any).hot;
+
+if (hot) {
+  hot.accept('./app', () => {
+    renderApp();
+  });
+}

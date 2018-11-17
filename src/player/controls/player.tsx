@@ -9,6 +9,7 @@ import PreviousButton from './previous-button';
 export interface IPlayerControlsProps {
   playingStatus: PlayingStatus;
   onPlayButtonClick: () => void;
+  onPreviousButtonClick: () => void;
 }
 
 export default class PlayerControls extends React.Component<IPlayerControlsProps> {
@@ -23,7 +24,7 @@ export default class PlayerControls extends React.Component<IPlayerControlsProps
     >
       <PreviousButton
         playingStatus={this.props.playingStatus}
-        onClick={() => {}} />
+        onClick={this.props.onPreviousButtonClick} />
       <PlayButton
         playingStatus={this.props.playingStatus}
         onClick={this.props.onPlayButtonClick} />

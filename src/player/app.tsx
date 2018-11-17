@@ -7,6 +7,7 @@ import PlayerControls from './controls/player';
 import HeaderTitle from './header/title';
 import { PlayingStatus } from './player-state';
 import theme from './theme';
+import Song from './audio/song';
 
 interface IAppState {
   playingStatus: PlayingStatus;
@@ -15,6 +16,7 @@ interface IAppState {
 export default class App extends React.Component<any, IAppState> {
 
   private audioProvider: AudioProvider;
+  private song: Song;
 
   constructor(props: any, state: IAppState) {
     super(props, state);
@@ -22,20 +24,28 @@ export default class App extends React.Component<any, IAppState> {
       playingStatus: 'paused',
     };
     this.audioProvider = new AudioProvider();
-    this.audioProvider.addNode('test', '/Users/jportela/Desktop/hotelcalifornia.mp3');
+    this.song = new Song(this.audioProvider);
+    this.song.loadFile('/Users/jportela/Desktop/hotelcalifornia.mp3');
   }
 
   onPlayButtonClick = () => {
     if (this.state.playingStatus === 'playing') {
-      this.audioProvider.pause('test');
+      this.song.pause();
       this.setState({
         playingStatus: 'paused',
       });
     } else {
-      this.audioProvider.play('test');
+      this.song.play();
       this.setState({
         playingStatus: 'playing',
       });
+    }
+  }
+
+  onPreviousButtonClick = () => {
+    if (this.state.playingStatus === 'playing') {
+      this.song.stop();
+      this.song.play();
     }
   }
 
@@ -52,6 +62,7 @@ export default class App extends React.Component<any, IAppState> {
       <PlayerControls
         playingStatus={this.state.playingStatus}
         onPlayButtonClick={this.onPlayButtonClick}
+        onPreviousButtonClick={this.onPreviousButtonClick}
       />
     </Grid>
   </MuiThemeProvider>);
