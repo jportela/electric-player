@@ -3,11 +3,11 @@ import { MuiThemeProvider } from '@material-ui/core/styles';
 import * as React from 'react';
 
 import AudioProvider from './audio/provider';
+import Song from './audio/song';
 import PlayerControls from './controls/player';
 import HeaderTitle from './header/title';
 import { PlayingStatus } from './player-state';
 import theme from './theme';
-import Song from './audio/song';
 
 interface IAppState {
   playingStatus: PlayingStatus;

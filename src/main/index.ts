@@ -9,19 +9,17 @@ function createWindow() {
 
   mainWindow.loadFile('./dist/player.html');
 
-  // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  console.log('env', process.env.NODE_ENV)
 
   // Emitted when the window is closed.
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
-  installExtension(REACT_DEVELOPER_TOOLS).then((name) => {
-    console.log(`Added Extension:  ${name}`);
-  })
-  .catch((err) => {
-    console.log('An error occurred: ', err)
-  });
+  if (process.env.NODE_ENV === 'development') {
+    installExtension(REACT_DEVELOPER_TOOLS);
+    // Open the DevTools.
+    // mainWindow.webContents.openDevTools()
+  }
 }
 
 // This method will be called when Electron has finished

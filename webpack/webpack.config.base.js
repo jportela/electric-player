@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 
 const baseConfig = {
   node: {
@@ -35,7 +36,8 @@ const baseConfig = {
     path: path.resolve(__dirname, '../dist')
   },
   externals: [
-    '7zip'
+    '7zip',
+    'devtron',
   ]
 };
 
@@ -45,7 +47,7 @@ const productionConfig = {
 
 const developmentConfig = {
   mode: 'development',
-}
+};
 
 function applyEnvironment(env) {
   if (env === 'production') {
