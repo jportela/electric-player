@@ -2,16 +2,16 @@ import Grid from '@material-ui/core/Grid';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import * as React from 'react';
 
+import { IAudioController } from '../shared/audio/common/controller';
+import { ISongCache } from '../shared/audio/common/song-cache';
+import Client from '../shared/ipc/node/client';
+import RpcClient from '../shared/ipc/node/rpc-client';
+import AudioControllerChannel from './audio/controller';
+import SongCacheChannel from './audio/song-cache';
 import PlayerControls from './controls/player';
 import HeaderTitle from './header/title';
 import { PlayingStatus } from './player-state';
 import theme from './theme';
-import Client from '../shared/ipc/node/client';
-import RpcClient from '../shared/ipc/node/rpc-client';
-import AudioControllerChannel from './audio/controller';
-import { IAudioController } from '../shared/audio/common/controller';
-import { ISongCache } from '../shared/audio/common/song-cache';
-import SongCacheChannel from './audio/song-cache';
 
 interface IAppState {
   playingStatus: PlayingStatus;
