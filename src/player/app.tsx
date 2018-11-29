@@ -2,12 +2,16 @@ import Grid from '@material-ui/core/Grid';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import * as React from 'react';
 
-import AudioProvider from './audio/provider';
-import Song from './audio/song';
 import PlayerControls from './controls/player';
 import HeaderTitle from './header/title';
 import { PlayingStatus } from './player-state';
 import theme from './theme';
+import Client from '../shared/ipc/node/client';
+import RpcClient from '../shared/ipc/node/rpc-client';
+import AudioControllerChannel from './audio/controller';
+import { IAudioController } from '../shared/audio/common/controller';
+import { ISongCache } from '../shared/audio/common/song-cache';
+import SongCacheChannel from './audio/song-cache';
 
 interface IAppState {
   playingStatus: PlayingStatus;
@@ -15,37 +19,44 @@ interface IAppState {
 
 export default class App extends React.Component<any, IAppState> {
 
-  private audioProvider: AudioProvider;
-  private song: Song;
+  private client: Client;
+  private rpcClient: RpcClient;
+  private audioController: IAudioController;
+  private songCache: ISongCache;
 
   constructor(props: any, state: IAppState) {
     super(props, state);
     this.state = {
       playingStatus: 'paused',
     };
-    this.audioProvider = new AudioProvider();
-    this.song = new Song(this.audioProvider);
-    this.song.loadFile('/Users/jportela/Desktop/hotelcalifornia.mp3');
+    this.client = new Client('audio-worker');
+    this.rpcClient = new RpcClient(this.client);
+    this.audioController = new AudioControllerChannel(this.rpcClient);
+    this.songCache = new SongCacheChannel(this.rpcClient);
+
+    this.client.connect().then(() => {
+      this.songCache.loadFromFile('/Users/jportela/Desktop/hotelcalifornia.mp3', 'hotel');
+    });
   }
 
   onPlayButtonClick = () => {
     if (this.state.playingStatus === 'playing') {
-      this.song.pause();
+      this.audioController.stop();
       this.setState({
         playingStatus: 'paused',
       });
     } else {
-      this.song.play();
+      this.audioController.playSong('hotel');
       this.setState({
         playingStatus: 'playing',
       });
     }
   }
 
-  onPreviousButtonClick = () => {
+  onPreviousButtonClick = async () => {
     if (this.state.playingStatus === 'playing') {
-      this.song.stop();
-      this.song.play();
+      await this.audioController.stop();
+      await this.audioController.playSong('hotel');
     }
   }
 

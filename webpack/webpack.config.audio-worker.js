@@ -2,17 +2,15 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const baseConfig = require('./webpack.config.base');
 
-const playerConfig = Object.assign({}, baseConfig, {
+const audioWorkerConfig = Object.assign({}, baseConfig, {
   target: 'electron-renderer',
   entry: {
-    player: './src/player/index.tsx',
+    audioWorker: './src/audio-worker/index.ts',
   },
   plugins: [
     ...baseConfig.plugins,
     new HtmlWebpackPlugin({
-      title: 'Electric Player',
-      filename: 'player.html',
-      template: './views/player.html'
+      filename: 'audio-worker.html',
     })
   ],
 });
@@ -27,7 +25,7 @@ const developmentConfig = {
    watchContentBase: true,
   },
   plugins: [
-    ...playerConfig.plugins,
+    ...audioWorkerConfig.plugins,
     new webpack.HotModuleReplacementPlugin()
   ],
   output: {
@@ -38,10 +36,10 @@ const developmentConfig = {
 
 function applyEnvironment(env) {
   if (env === 'production') {
-    return Object.assign({}, playerConfig, productionConfig);
+    return Object.assign({}, audioWorkerConfig, productionConfig);
   }
   
-  return Object.assign({}, playerConfig, developmentConfig);
+  return Object.assign({}, audioWorkerConfig, developmentConfig);
 }
 
 module.exports = applyEnvironment(process.env.ENV);

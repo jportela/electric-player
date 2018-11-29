@@ -10,6 +10,9 @@ const baseConfig = {
     rules: [{
       test: /\.tsx?$/,
       loader: 'ts-loader',
+      options: {
+        context: __dirname, 
+      }
     },
     {
       test:/\.css$/,

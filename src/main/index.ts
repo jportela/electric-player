@@ -1,31 +1,15 @@
-import { app, BrowserWindow } from 'electron';
-import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
+import { app } from 'electron';
+import { setupBackgroundWindows } from './windows/background';
+import PlayerWindows from './windows/player';
 
-let mainWindow: BrowserWindow;
+const playerWindows = new PlayerWindows();
 
-function createWindow() {
-  // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600});
-
-  mainWindow.loadFile('./dist/player.html');
-
-  console.log('env', process.env.NODE_ENV)
-
-  // Emitted when the window is closed.
-  mainWindow.on('closed', () => {
-    mainWindow = null;
-  });
-  if (process.env.NODE_ENV === 'development') {
-    installExtension(REACT_DEVELOPER_TOOLS);
-    // Open the DevTools.
-    // mainWindow.webContents.openDevTools()
-  }
+function createWindows() {
+  setupBackgroundWindows();
+  playerWindows.createWindow();
 }
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
-app.on('ready', createWindow);
+app.on('ready', createWindows);
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
@@ -39,8 +23,8 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
-  if (mainWindow === null) {
-    createWindow();
+  if (playerWindows.getPlayerWindows().length === 0) {
+    playerWindows.createWindow();
   }
 });
 
